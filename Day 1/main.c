@@ -14,8 +14,10 @@ int main(int argc, char** argv){
     char line[14];
 
     int totalDistance = 0;
+    int similarityScore = 0;
 
     int list1[1000], list2[1000];
+    int numReps[1000];
 
     int head = 0;
 
@@ -61,5 +63,22 @@ int main(int argc, char** argv){
         printf("Difference between lists 1 & 2 @ %d is %d\n", i, abs(list1[i] - list2[i]));
     }
 
+    for(int i = 0; i < 1000; i++){
+        int reps = 0;
+        int val  = list1[i];
+        printf("Checking number %d @ %d for repeats\n", val, i);
+        for(int j = 0; j < 1000; j++){
+            if(list2[j] == val) reps++;
+        }
+        printf("Number %d has %d duplicates in list 2\n", val, reps);
+        numReps[i] = reps;
+    }
+
+    for(int i = 0; i < 1000; i++){
+        if(numReps[i] == 0) continue;
+        similarityScore += (list1[i] * numReps[i]);
+    }
+
     printf("\nTotal difference between lists: %d\n", totalDistance);
+    printf("Total Similarity Score Between lists: %d\n", similarityScore);
 }
