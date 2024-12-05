@@ -81,4 +81,6 @@ int main(int argc, char** argv){
 
     printf("\nTotal difference between lists: %d\n", totalDistance);
     printf("Total Similarity Score Between lists: %d\n", similarityScore);
+
+    fclose(fpointer);
 }
