@@ -16,44 +16,32 @@ int main(int argc, char** argv){
     int endofRep1, endofRep2;
     int startofrep2;
 
-    while(fgets(line, 25, fpointer)){
-        char vals[14];
+    while(fgets(line, 14, fpointer)){
         int head = 0;
-
-        for(int i = 0; i < 25; i++){
-            if(line[i] == '\0') {vals[head] = 'R'; endofRep2 = head; break;}
-
-            if(line[i] == ' ' && vals[head-1] == 'X') continue;
-            else if(line[i] == ' ') {vals[head] = 'X'; head++; endofRep1 = head; startofrep2 = head +1;}
-            else {vals[head] = line[i]; head++;}
-        }
 
         printf("%s\n", line);
 
 
-        int report1[5];
-        int report2[5];
+        int report[14];
 
-        for (int i = 0; i < endofRep1; i++)
-        {
-            int val = vals[i] - '0';
-            report1[i-1] = val;
+        for(int i; i < 14; i++){
+            //if(line[i] == ' ' || line[i] == '\0') continue;
+            // else{
+                report[head] = line[i] - '0';
+                printf(" ");
+                printf("%d", line[i]);
+                printf(" ");
+                head++;
+            // }
         }
 
-        //continue;
         
-        for(int i = 0; i < (endofRep2 + startofrep2); i++){
-            int val = vals[i + startofrep2] - '0';
-            report2[i] = val;
-        }
 
-        for(int p = 0; p < 5; p++){
-            printf("%d", report1[p]);
+        for(int p = 0; p < 10; p++){
+            printf("%d", report[p]);
         }
 
         printf("\n");
-
-        printf("%d\n", report2[0]);
 
         break;
     }
