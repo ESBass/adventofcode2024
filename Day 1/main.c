@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int compare(const void* a, const void* b){
     return (*(int*)a - *(int*)b);
@@ -12,37 +13,53 @@ int main(int argc, char** argv){
 
     char line[14];
 
-    int flag = 0;
-    int endofRep1, endofRep2;
-    int startofrep2;
+    int totalDistance = 0;
+
+    int list1[1000], list2[1000];
+
+    int head = 0;
 
     while(fgets(line, 14, fpointer)){
-        int head = 0;
 
-        printf("%s\n", line);
+        if(line[0] == '\n') continue;
+
+        int lhead = 0;
+
+        printf("\n%s\n", line);
 
 
-        int report[14];
+        char list1c[6], list2c[6];
+        list1c[5] = '\0'; list2c[5] = '\0';
 
-        for(int i; i < 14; i++){
-            //if(line[i] == ' ' || line[i] == '\0') continue;
-            // else{
-                report[head] = line[i] - '0';
-                printf(" ");
-                printf("%d", line[i]);
-                printf(" ");
-                head++;
-            // }
+        for (int i = 0; i < 5; i++)
+        {
+            list1c[lhead] = line[i];
+            list2c[lhead] = line[i+8];
+            lhead++;
         }
 
-        
+        printf("%s %s\n", list1c, list2c);
 
-        for(int p = 0; p < 10; p++){
-            printf("%d", report[p]);
-        }
+        list1[head] = atoi(list1c);
+        list2[head] = atoi(list2c);
 
-        printf("\n");
+        printf("%d %d\n", list1[head], list2[head]);
 
-        break;
+        head++;
+
     }
+
+    qsort(list1, 1000, sizeof(int), compare);
+    qsort(list2, 1000, sizeof(int), compare);
+
+    for(int p = 0; p < 1000; p++){
+        printf("@P%d, list 1: %d & list 2: %d\n", p, list1[p], list2[p]);
+    }
+
+    for(int i = 0; i < 1000; i++){
+        totalDistance += abs(list1[i] - list2[i]);
+        printf("Difference between lists 1 & 2 @ %d is %d\n", i, abs(list1[i] - list2[i]));
+    }
+
+    printf("\nTotal difference between lists: %d\n", totalDistance);
 }
